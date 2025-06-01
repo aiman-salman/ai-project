@@ -24,7 +24,7 @@ export const StatCard: React.FC<StatCardProps> = ({
     // <div className="bg-sky-300 rounded-lg shadow p-4 transition-all duration-200 hover:shadow-md">
     <div className={`${bgColor} rounded-lg shadow p-4 transition-all duration-200 hover:shadow-md`}>
       <div className="flex items-center justify-between">
-        <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center">
+        <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center">
           {icon}
         </div>
         

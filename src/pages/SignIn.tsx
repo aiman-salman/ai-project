@@ -4,6 +4,7 @@ import { app } from '../firebase'
 import { useNavigate, Link } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import bicyclego_icon from '../assets/bicyclego_icon.svg'
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth"
 
 const auth = getAuth(app)
@@ -50,10 +51,14 @@ const SignIn = () => {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br bg-[#1f1f1f] px-4">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br bg-[#1f1f1f] px-4">
+      <div className="flex flex-row justify-center gap-3 items-center mb-6">
+        <img src={bicyclego_icon} alt="Bicycle Go logo" className="h-16 w-auto mb-2" />
+        <h1 className="text-3xl font-bold text-sky-300">BicycleGo</h1>
+      </div>
       <div className="w-full max-w-md border-2 border-gray-500 p-6 rounded-lg shadow-lg">
         <ToastContainer />
-        <h2 className="text-cyan-200 font-bold text-2xl text-center mb-6">Sign In</h2>
+        <h2 className="text-sky-300 font-bold text-2xl text-center mb-6">Sign In</h2>
         <form onSubmit={signInUser}>
           <div className="mb-4">
             <label className="text-gray-300 block mb-2">Email</label>
@@ -85,7 +90,7 @@ const SignIn = () => {
 
         <button
           onClick={signInWithGoogle}
-          className="mt-4 w-full py-2 border border-sky-300 text-gray-300 rounded-full hover:bg-white hover:text-black transition duration-200"
+          className="mt-4 w-full py-2 border border-sky-300 text-gray-300 rounded-full hover:bg-gray-300 hover:text-[#2a2a2a] font-semibold transition duration-200"
         >
           Sign in with Google
         </button>

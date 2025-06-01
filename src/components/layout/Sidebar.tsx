@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { Home, MapPin, Users, X, Bike } from 'lucide-react';
+import { Home, MapPin, Users, X } from 'lucide-react';
+import bicyclego_icon from '../../assets/bicyclego_icon.svg'
 
 interface SidebarProps {
   isOpen: boolean;
@@ -34,7 +35,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, setIsOpen }) => {
           {/* Sidebar header */}
           <div className="flex items-center justify-between px-4 py-4 border-r-2 border-b-2 border-gray-500">
             <div className="flex items-center space-x-2">
-              <Bike className="h-8 w-8 text-sky-300" />
+              <img src={bicyclego_icon} alt='Bicycle-Go-logo' className='h-8 w-8' />
               <span className="text-lg font-semibold tracking-tight text-gray-300">Bicycle-Go</span>
             </div>
             <button
