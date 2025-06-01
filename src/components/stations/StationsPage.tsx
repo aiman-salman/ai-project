@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { collection, addDoc } from 'firebase/firestore'
+import { collection, doc, setDoc } from 'firebase/firestore'
 import { db } from '../../firebase'
 import { useStationContext } from '../../context/StationContext';
 import { Station } from '../../types';
@@ -45,31 +45,30 @@ export const StationsPage: React.FC = () => {
     }))
   }
 
-
-  // NEW STATION
   const handleAddStation = async () => {
-    if(!newStation.name || !newStation.address || newStation.totalDocks === 0) {
+    if (!newStation.name || !newStation.address || newStation.totalDocks === 0) {
       toast.error('Please fill in all required fields and ensure total docks > 0.');
-      return
+      return;
     }
+  
+    try {
+      const stationsRef = collection(db, 'stations'); 
+      const docRef = doc(stationsRef); 
 
-    const stationToAdd: Station = {
-      id: '', 
-      name: newStation.name,
-      address: newStation.address,
-      status: newStation.status || 'active',
-      availableBikes: newStation.availableBikes || 0,
-      totalDocks: newStation.totalDocks || 0,
-      availableDocks:
-        (newStation.totalDocks || 0) - (newStation.availableBikes || 0),
-      lastUpdated: new Date().toISOString(),
-    }
-
-    try{
-      const stationsRef = collection(db, 'stations')
-      await addDoc(stationsRef, { ...stationToAdd });
-      
-      setIsModalOpen(false)
+      const stationToAdd: Station = {
+        id: docRef.id, 
+        name: newStation.name!,
+        address: newStation.address!,
+        status: newStation.status || 'active',
+        availableBikes: newStation.availableBikes || 0,
+        totalDocks: newStation.totalDocks || 0,
+        availableDocks: (newStation.totalDocks || 0) - (newStation.availableBikes || 0),
+        lastUpdated: new Date().toISOString(),
+      };
+  
+      await setDoc(docRef, stationToAdd); 
+  
+      setIsModalOpen(false);
       setNewStation({
         name: '',
         address: '',
@@ -78,14 +77,15 @@ export const StationsPage: React.FC = () => {
         availableDocks: 0,
         totalDocks: 0,
         lastUpdated: new Date().toISOString(),
-      })
+      });
+  
       toast.success('Station added successfully!');
+      refreshStations?.();
     } catch (err) {
-      console.log('Error adding station: ', err)
+      console.error('Error adding station:', err);
       toast.error('Failed to add station. Please try again.');
     }
-  }
-  
+  };
 
   return (
     <div className="space-y-6">
