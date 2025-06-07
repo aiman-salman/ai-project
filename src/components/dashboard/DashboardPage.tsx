@@ -1,14 +1,15 @@
 import React from 'react';
-import { mockSystemSummary} from '../../mockData';
 import { StatCard } from '../ui/StatCard';
 import { Bike, MapPin, Users, History } from 'lucide-react';
 import { RecentActivity } from './RecentActivity';
 import { StationStatusChart } from './StationStatusChart';
 import { useStationContext } from '../../context/StationContext';
+import { useUsersStats } from '../../hooks/useUsersStats';
 
 export const DashboardPage: React.FC = () => {
 
   const { stations } = useStationContext();
+  const { activeUsers, totalRides } = useUsersStats(); 
 
   const totalStations = stations.length;
   const activeStations = stations.filter(s => s.status === 'active').length;
@@ -38,15 +39,15 @@ export const DashboardPage: React.FC = () => {
         />
         <StatCard
           title="Active Users"
-          value={mockSystemSummary.activeUsers.toLocaleString()}
+          value={activeUsers.toLocaleString()}
           icon={<Users className="h-5 w-5 text-green-500" />}
           change={120}
           trend="up"
           bgColor="bg-green-100"
         />
         <StatCard
-          title="Rides This Month"
-          value={mockSystemSummary.ridesLastMonth.toLocaleString()}
+          title="Total Rides"
+          value={totalRides.toLocaleString()}
           icon={<History className="h-5 w-5 text-purple-500" />}
           change={8.3}
           trend="up"

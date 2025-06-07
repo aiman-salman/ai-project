@@ -32,7 +32,7 @@ export const StationCard: React.FC<StationCardProps> = ({ station }) => {
   };
   
   return (
-    <div className="bg-[#1c1c1c] border-2 border-slate-500 rounded-lg shadow hover:shadow-md transition-shadow">
+    <div className="bg-[#1c1c1c] border-2 border-gray-500 rounded-lg shadow hover:shadow-md transition-shadow">
       <div className="p-4">
         {/* Station header with status indicator */}
         <div className="flex items-start justify-between">
@@ -43,9 +43,9 @@ export const StationCard: React.FC<StationCardProps> = ({ station }) => {
               <span>{station.address}</span>
             </div>
           </div>
-          <div className="flex items-center">
+          <div className="flex items-center ">
             <span className={`w-3 h-3 rounded-full ${statusColor} mr-2`}></span>
-            <span className="text-xs font-medium text-gray-500">{statusText}</span>
+            <span className="text-xs font-medium text-gray-400">{statusText}</span>
           </div>
         </div>
         
@@ -53,13 +53,13 @@ export const StationCard: React.FC<StationCardProps> = ({ station }) => {
         <div className="mt-4 grid grid-cols-2 gap-3">
           <div className="bg-cyan-200 rounded-lg p-3">
             <p className="text-sm font-medium text-gray-500">Available Bikes</p>
-            <p className="text-xl font-semibold text-gray-900 mt-1">
+            <p className="text-xl font-semibold text-[#1c1c1c] mt-1">
               {station.availableBikes} <span className="text-sm text-gray-500">/ {station.totalDocks}</span>
             </p>
           </div>
           <div className="bg-gray-300 rounded-lg p-3">
             <p className="text-sm font-medium text-gray-500">Available Docks</p>
-            <p className="text-xl font-semibold text-gray-900 mt-1">
+            <p className="text-xl font-semibold text-[#1c1c1c] mt-1">
               {station.availableDocks} <span className="text-sm text-gray-500">/ {station.totalDocks}</span>
             </p>
           </div>
@@ -84,7 +84,7 @@ export const StationCard: React.FC<StationCardProps> = ({ station }) => {
         
         {/* Card footer */}
         <div className="mt-4 pt-3 border-t flex items-center justify-between">
-          <div className="text-xs text-gray-300">
+          <div className="text-xs text-gray-400">
             Updated at {formatTime(station.lastUpdated)}
           </div>
           <div className="flex space-x-2">
@@ -93,9 +93,9 @@ export const StationCard: React.FC<StationCardProps> = ({ station }) => {
                 <AlertTriangle className="h-4 w-4" />
               </button>
             )}
-            <button className="p-1 text-gray-500 hover:text-gray-700 rounded-full hover:bg-gray-50">
+            {/* <button className="p-1 text-gray-500 hover:text-gray-700 rounded-full hover:bg-gray-50">
               <Settings className="h-4 w-4" />
-            </button>
+            </button> */}
           </div>
         </div>
       </div>
